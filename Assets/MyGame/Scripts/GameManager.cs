@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     private int score = 0;
     private bool win = false;
+    public Text timeText;
+    private float timeleft = 60f;
+
+    public TMP_Text endScoreText;
+    public TMP_Text highScoreText;
+    private int highScore = 0;
 
 
     // die Start Methode wird einmalig vor dem ersten Frame aufgerufen, in dem das Skript aktiv ist
@@ -21,6 +28,14 @@ public class GameManager : MonoBehaviour
     // die Update Methode wird einmal pro Frame aufgerufen, solange das Skript aktiv ist
     private void Update()
     {
+
+        if (score > highScore)
+        {
+            highScore = score;
+        }
+        endScoreText.text = "Dein Score: " + score;
+        highScoreText.text = "Highscore: " + highScore;
+        
         //if the player hits 10 times, the player has won and the Spawn method will not called further. 
         if(win)
         {
@@ -32,6 +47,23 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             gameObject.GetComponent<AudioSource>().Play();
+        }
+
+        if (!win)
+        {
+            timeleft -= Time.deltaTime;
+            timeText.text = Mathf.CeilToInt(timeleft).ToString();
+
+            if (timeleft <= 0)
+            {
+                win = true;
+                winSprite.SetActive(true);
+            }
+        }
+
+        if (win && Input.GetKeyDown(KeyCode.R))
+        {
+            NextRound();
         }
     }
 
@@ -75,11 +107,16 @@ public class GameManager : MonoBehaviour
         print(score);
 
         scoreText.text = score.ToString();
+    }
 
-        if (score >= 100)
-        {
-        win = true;
-        winSprite.SetActive(true);
-        }
+    public void NextRound()
+    {
+        score = 0;
+        scoreText.text = "0";
+        win = false;
+        timeleft = 60f;
+        winSprite.SetActive(false);
+        CancelInvoke("Spawn");
+        InvokeRepeating("Spawn", 1f, 1f);
     }
 }

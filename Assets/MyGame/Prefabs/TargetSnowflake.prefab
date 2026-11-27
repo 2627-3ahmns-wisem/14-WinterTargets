@@ -143,3 +143,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   points: 20
+  speedX: -350
+  speedY: 250

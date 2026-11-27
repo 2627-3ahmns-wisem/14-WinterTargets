@@ -46,7 +46,22 @@ public class GameManager : MonoBehaviour
         float randomY = Random.Range(-202f, 202f);
         Vector2 random2DPosition = new Vector2(randomX, randomY);
 
-        int index = Random.Range(0, targets.Length);   // NEU: zufälligen Typ wählen
+        float zufall = Random.Range(0f, 100f);
+
+        int index;
+
+        if (zufall < 60f)
+        {
+            index = 0;
+        }
+        else if (zufall < 90f)
+        {
+            index = 1;
+        }
+        else
+        {
+            index = 2;
+        }
         GameObject newTarget = Instantiate(targets[index], parentOfTargets.transform);
         newTarget.transform.localPosition = random2DPosition;
     }

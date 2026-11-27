@@ -771,9 +771,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets:
-  - {fileID: 4591863265193547165, guid: f046f50ab6dae8946b28b0ef9a19e621, type: 3}
   - {fileID: 4591863265193547165, guid: 68242cd375167264b82e4b2464edb810, type: 3}
   - {fileID: 4591863265193547165, guid: 1d545d9ee32773840ad8c2121769dd69, type: 3}
+  - {fileID: 4591863265193547165, guid: f046f50ab6dae8946b28b0ef9a19e621, type: 3}
   parentOfTargets: {fileID: 958871934}
   winSprite: {fileID: 73667832}
   scoreText: {fileID: 821733796}
